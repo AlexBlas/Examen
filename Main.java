@@ -3,7 +3,8 @@ import java.util.Random;
 
 public class Main {
 
-    static protected String paraules[] = {"hola","programació","casa"};
+    private static final int NUM_MAX_RANDOM = 3; //Numero maxim obtingut en el random.
+	static protected String paraules[] = {"hola","programació","casa"};
     static protected int index;
     static protected String p;
     
@@ -16,19 +17,21 @@ public class Main {
         System.out.println("Comença el joc!");
 
         Random rand = new Random();
-        index = rand.nextInt(3);
-        for (int i=0; i<paraules[index].length(); i++) {
+        index = rand.nextInt(NUM_MAX_RANDOM);
+        int llargada_paraula = paraules[index].length();// Numero de llargada de la paraula seleccionada
+        
+		for (int i=0; i<llargada_paraula; i++) {
             p += "_";
         }
 
         System.out.println(p);
 
-        Scanner reader = new Scanner(System.in);
+        Scanner lletra = new Scanner(System.in); // Renombrar el objecte reader per lletra.
 
         int num_errors = 0;
 
         while (!p.equals(paraules[index]) && num_errors < 5) {
-            if (!nova_lletra(reader.next().charAt(0))) {
+            if (!nova_lletra(lletra.next().charAt(0))) {
                 num_errors++;
             }
             System.out.println(p);
